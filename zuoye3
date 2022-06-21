@@ -1,0 +1,21 @@
+import java.util.Scanner;
+                    
+public class Main {
+    public static void main(String[] args) {
+        Scanner in=new Scanner(System.in);
+        int data=in.nextInt();
+        int jcount=0;
+        int ocount=0;
+        while(data!=-1) {
+            if(data%2==0) {
+                ocount++;
+            }
+            else {
+                jcount++;
+            }
+            data=in.nextInt();
+        }
+        System.out.println(jcount+" "+ocount);
+        in.close();
+    }
+}
