@@ -1,0 +1,19 @@
+import java.util.Scanner;
+public class Main{
+    public static void main(String arg[]){
+        Scanner in = new Scanner(System.in);
+        int input = in.nextInt();
+        int ge = input%10, shi = input%100/10, bai = input/100, qiang;
+        if (input > 1000){
+            qiang = input/1000;
+        }
+        int output;
+        if (bai >= 8){
+            output = input - 800;
+        }
+        else {
+            output = input + 2400 -800;
+        }
+        System.out.print(output);
+    }
+}
