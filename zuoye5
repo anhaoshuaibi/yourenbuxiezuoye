@@ -1,0 +1,80 @@
+import java.util.Scanner;
+ 
+public class Main {
+ 
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		Scanner in = new Scanner(System.in);
+		final int SIZE = 101;
+		int[] a = new int[SIZE]; // 第一个多项式
+		int[] b = new int[SIZE]; // 第二个多项式
+		int[] c = new int[SIZE]; // 上述两个多项式之和
+		int expo; // 幂指数
+		// 输入多项式a
+		do {
+			expo = in.nextInt();
+			a[expo] = in.nextInt();
+ 
+		} while (expo != 0);
+		// 输入多项式b
+		do {
+			expo = in.nextInt();
+			b[expo] = in.nextInt();
+ 
+		} while (expo != 0);
+		// 求和
+		for (int i = 0; i < c.length; i++) {
+			c[i] = a[i] + b[i];
+		}
+		// 输出结果
+		// 需要考虑的特殊情况：
+		// 1：求和结果等于0时，显示0；
+		// 2：最高幂次前面不显示加号；
+		// 3：非最高次幂系数为1或-1，不显示1；
+		// 4：非最高次幂系数为正数需要手动输出“+”，系数为负数则不需要输出符号；
+		// 5：幂次为1，不显示1
+		boolean flag = true; // 最高次幂标记
+		for (int i = c.length - 1; i > 1; i--) {
+			if (c[i] != 0 && flag) { // 最高次幂
+				if (c[i] == 1)
+					System.out.print("x" + i);
+				else if (c[i] == -1)
+					System.out.print("-x" + i);
+				else
+					System.out.print(c[i] + "x" + i);
+				flag = false;
+			} else if (c[i] == 1 && !flag) { // 非最高次幂
+				System.out.print("+x" + i);
+			} else if (c[i] == -1 && !flag) {
+				System.out.print("-x" + i);
+			} else if (c[i] != 0 && !flag) {
+				if (c[i] > 0)
+					System.out.print("+" + c[i] + "x" + i);
+				else
+					System.out.print(c[i] + "x" + i);
+			}
+		}
+		// 一次幂项
+		if (c[1] == 1 && !flag)
+			System.out.print("+x");
+		else if (c[1] == -1 && !flag)
+			System.out.print("-x");
+		else if (c[1] != 0 && !flag) {
+			if (c[1] > 0)
+				System.out.print("+" + c[1] + "x");
+			else
+				System.out.print(c[1] + "x");
+		} else if (c[1] != 0 && flag) { // 最高次幂是一次幂
+			System.out.print(c[1] + "x");
+			flag = false;
+		}
+		// 常数项
+		if (c[0] != 0 && !flag) {
+			if (c[0] > 0)
+				System.out.print("+" + c[0]);
+			else
+				System.out.print(c[0]);
+		} else if (flag) // 最高次幂是常数项
+			System.out.print(c[0]);
+	}
+}
